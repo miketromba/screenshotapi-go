@@ -14,6 +14,8 @@ go get github.com/miketromba/screenshotapi-go
 import screenshotapi "github.com/miketromba/screenshotapi-go"
 ```
 
+Requires Go 1.21 or later.
+
 ## Authentication
 
 Create an API key from the [ScreenshotAPI dashboard][api-keys], then keep it in an environment variable:

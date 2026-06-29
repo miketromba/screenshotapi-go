@@ -372,9 +372,10 @@ func parseErrorResponse(resp *http.Response) error {
 	}
 
 	var errResp struct {
-		Error   string `json:"error"`
-		Message string `json:"message"`
-		Balance *int   `json:"balance"`
+		Error         string `json:"error"`
+		Message       string `json:"message"`
+		Balance       *int   `json:"balance"`
+		CreditBalance *int   `json:"creditBalance"`
 	}
 	if err := json.Unmarshal(body, &errResp); err != nil {
 		msg := strings.TrimSpace(string(body))
@@ -401,7 +402,9 @@ func parseErrorResponse(resp *http.Response) error {
 		return &AuthenticationError{APIError{StatusCode: 401, Code: "authentication_error", Message: msg}}
 	case 402:
 		balance := 0
-		if errResp.Balance != nil {
+		if errResp.CreditBalance != nil {
+			balance = *errResp.CreditBalance
+		} else if errResp.Balance != nil {
 			balance = *errResp.Balance
 		}
 		return &InsufficientCreditsError{

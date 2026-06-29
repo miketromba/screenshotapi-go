@@ -88,7 +88,7 @@ func ExampleClient_Screenshot_errorHandling() {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusPaymentRequired)
-		_, _ = w.Write([]byte(`{"error":"Insufficient credits","balance":0}`))
+		_, _ = w.Write([]byte(`{"error":"Insufficient credits","creditBalance":0}`))
 	}))
 	defer server.Close()
 

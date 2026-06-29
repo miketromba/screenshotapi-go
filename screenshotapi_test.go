@@ -309,7 +309,7 @@ func TestScreenshotTypedErrors(t *testing.T) {
 		{
 			name:   "insufficient credits",
 			status: http.StatusPaymentRequired,
-			body:   `{"error":"Insufficient credits","balance":5}`,
+			body:   `{"error":"Insufficient credits","creditBalance":5}`,
 			assert: func(t *testing.T, err error) {
 				var creditsErr *InsufficientCreditsError
 				if !errors.As(err, &creditsErr) {
